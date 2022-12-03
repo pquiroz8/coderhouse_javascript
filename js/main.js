@@ -3,27 +3,12 @@ function test_dm() {
     let antecedentes;
     let hta;
     let actFisica;
-    let anioNac;
     let genero;
     let diabGest;
-    let peso;
-    let altura;
     let imc;
-    let anioActual;
-    let sumatPuntos = 0 ;
-    
-    anioActual = new Date().getFullYear();
-
-    anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
-           
-    while (isNaN(anioNac) || (anioNac >= anioActual)){ //Validación año de nacimiento
-        alert("Por favor, ingrese un valor numérico menor que el año actual");
-        anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
-    }
-    
-    edad = calcEdad(anioNac,anioActual);
-    console.log("Año actual: " + anioActual);
-    console.log("Año Nacimiento: " + anioNac);
+    let puntos = 0;
+       
+    edad = calcEdad();
     console.log("Edad: " + edad);
 
     
@@ -39,24 +24,7 @@ function test_dm() {
         } while ((diabGest != "SI") && (diabGest != "NO"));
     }
 
-    peso = parseFloat(prompt("Ingrese su peso (en kg)"));
-
-    while ((isNaN(peso)) || (peso <= 0 )){ //Validación para el peso
-        alert("Por favor, ingrese un valor numérico mayor que 0");
-        peso = parseFloat(prompt("Ingrese su peso (en kg)"));
-    }
-    console.log("Peso: " + peso);
-
-    altura = parseFloat(prompt("Ingrese su altura (en metros)"));
-
-    while ((isNaN(altura)) || (altura <= 0 )){ //Validación para el altura
-        alert("Por favor, ingrese un valor numérico mayor que 0");
-        altura = parseFloat(prompt("Ingrese su altura (en cm)"));
-    }
-    console.log("Altura: " + altura);
-
-
-    imc = calcIMC(peso, altura).toFixed(2);
+    imc = calcIMC().toFixed(2);
     console.log("IMC: " + imc);
 
     do{ //Validación para antecedentes familiares.
@@ -74,44 +42,67 @@ function test_dm() {
         console.log("Actividad física: " + actFisica);
     } while ((actFisica != "SI")&&(actFisica != "NO"));
 
-    sumatPuntos = calcRiesgo(edad, genero, antecedentes, hta, actFisica, imc);
+    puntos = calcRiesgo(edad, genero, antecedentes, hta, actFisica, imc);
+    console.log("Puntos: " + puntos);
 
-    switch (sumatPuntos){
+    switch (puntos){
         case  0:
         case  1:
         case  2:
         case  3:
-            alert("El puntaje de su prueba es: " + sumatPuntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Baja");
+            alert("El puntaje de su prueba es: " + puntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Baja");
             break;
         case  4:
         case  5:
         case  6:
         case  7:
-            alert("El puntaje de su prueba es: " + sumatPuntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Moderada");
+            alert("El puntaje de su prueba es: " + puntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Moderada");
             break;
         case 8:
         case 9:
         case 10:
-            alert("El puntaje de su prueba es: " + sumatPuntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Alta");
+            alert("El puntaje de su prueba es: " + puntos + "\n" + "La probabilidad de sufrir Diabetes Mellitus Tipo II es: Alta");
             break;   
     }
 
     
-
     //FUNCIONES
 
-    function calcEdad(anioNac, anioActual){ //Función para calcular la edad.
+    function calcEdad(){ //Función para calcular la edad.
+        let anioActual = new Date().getFullYear();
+        let anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
+           
+        while (isNaN(anioNac) || (anioNac >= anioActual)){ //Validación año de nacimiento. Valor numérico y no puede ser mayor o igual al año actual.
+        alert("Por favor, ingrese un valor numérico menor que el año actual");
+        anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
+        }
+        console.log("Año actual: " + anioActual);
+        console.log("Año Nacimiento: " + anioNac);
         return (anioActual - anioNac);
     } 
 
-    function calcIMC(peso, altura){
+    function calcIMC(){ //Función para calcular el IMC de la persona.
+        let peso = parseFloat(prompt("Ingrese su peso (en kg)"));
+
+        while ((isNaN(peso)) || (peso <= 0 )){ //Validación para el peso. Valor numérico mayor que 0.
+        alert("Por favor, ingrese un valor numérico mayor que 0");
+        peso = parseFloat(prompt("Ingrese su peso (en kg)"));
+        }
+        console.log("Peso: " + peso);
+
+        let altura = parseFloat(prompt("Ingrese su altura (en metros)"));
+
+        while ((isNaN(altura)) || (altura <= 0 )){ //Validación para el altura. Valor numérico mayor que 0.
+        alert("Por favor, ingrese un valor numérico mayor que 0");
+        altura = parseFloat(prompt("Ingrese su altura (en cm)"));
+        }
+        console.log("Altura: " + altura);
         return (peso/(altura*altura));
     }
     
 
     function calcRiesgo(edad, genero, antecedentes, hta, actFisica, imc) {
-        let puntos = 0;
-    
+        
         do{
 
             if (edad < 40){ //Sumar puntos según edad.
@@ -179,7 +170,7 @@ function test_dm() {
                     puntos = puntos + 3;
             } 
             console.log("Sumatoria de Puntos imc: " + puntos);
-            return puntos;
         }  while (puntos < 0);
+        return puntos;
     }
 }
