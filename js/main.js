@@ -7,7 +7,7 @@ function test_dm() {
     let diabGest;
     let imc;
     let puntos = 0;
-       
+    
     edad = calcEdad();
     console.log("Edad: " + edad);
 
@@ -71,7 +71,7 @@ function test_dm() {
     function calcEdad(){ //Función para calcular la edad.
         let anioActual = new Date().getFullYear();
         let anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
-           
+        
         while (isNaN(anioNac) || (anioNac >= anioActual)){ //Validación año de nacimiento. Valor numérico y no puede ser mayor o igual al año actual.
         alert("Por favor, ingrese un valor numérico menor que el año actual");
         anioNac = parseInt(prompt("Ingrese su año de nacimiento"));
@@ -106,16 +106,16 @@ function test_dm() {
         do{
 
             if (edad < 40){ //Sumar puntos según edad.
-              puntos = puntos + 0;
-             } else if ((edad >= 40) && (edad <= 49)){
+            puntos = puntos + 0;
+            } else if ((edad >= 40) && (edad <= 49)){
             puntos = puntos + 1;
-             } else if ((edad >= 50) && (edad <= 59)) {
-             puntos = puntos + 2;
-             } else {
+            } else if ((edad >= 50) && (edad <= 59)) {
+            puntos = puntos + 2;
+            } else {
             puntos = puntos + 3;
-         } 
+        } 
     
-         console.log("Sumatoria de Puntos edad: " + puntos);
+        console.log("Sumatoria de Puntos edad: " + puntos);
         
             switch (genero) { //Sumar puntos según género
                 case "M":    
@@ -165,7 +165,7 @@ function test_dm() {
                 } else if ((imc >= 25) && (imc <= 29)){
                     puntos = puntos + 1;
                 } else if ((imc >= 30) && (imc <= 39)) {
-                     puntos = puntos + 2;
+                    puntos = puntos + 2;
                 } else {
                     puntos = puntos + 3;
             } 
