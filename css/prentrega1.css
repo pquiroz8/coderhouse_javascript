@@ -2,7 +2,6 @@ body{
     background-color: #BCEAD5;
 }
 
-
 .flex-container{
     display: flex;
     flex-direction: column;
@@ -38,7 +37,7 @@ body{
     padding: 10px 20px 10px 20px;
     text-decoration: none;
     }
-      
+
 .btn:hover {
     background: #5DA7DB;
     background-image: -webkit-linear-gradient(top, #5DA7DB, #0D4C92);
